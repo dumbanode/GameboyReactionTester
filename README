@@ -10,6 +10,13 @@ After the player presses the button, the Gameboy will send the
 reaction time to the Beaglebone.
 This is implemented using a modified version of RIOS to run on Gameboy
 
+Video Demonstartions:
+-----------------------------------------
+https://www.youtube.com/watch?v=jOpj3uD2w0o
+https://www.youtube.com/watch?v=c0xnxYCXXe8
+https://www.youtube.com/watch?v=KJc5xkmffTM
+
+
 The directory structure is as follows:
 -----------------------------------------
 build - object files and etc when compiling to a Gameboy binary
@@ -42,5 +49,6 @@ When compiled, it will produce a .gb file. A .gb file is a Gameboy binary.
 When compiling, Windows has an error where the batch file doesn’t like the length of where a compiler is located. 
 If you encounter that issue, move the folder containing all the files to a higher directory closer to the root,
 then it should be able to compile successfully.
+
 
 
