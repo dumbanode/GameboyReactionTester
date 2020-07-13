@@ -1,0 +1,50 @@
+Gameboy Reaction Tester
+Cameron Smith
+April 24 2020
+
+This program is a reaction tester for the Nintendo Gameboy
+Using the Beaglebone Black, it will send a random value
+between 0-7. The Gameboy will interpret that value as an instruction
+for the player to complete (Pressing a button). 
+After the player presses the button, the Gameboy will send the 
+reaction time to the Beaglebone.
+This is implemented using a modified version of RIOS to run on Gameboy
+
+The directory structure is as follows:
+-----------------------------------------
+build - object files and etc when compiling to a Gameboy binary
+
+graphics - the graphics used for the reaction tester program
+
+include - .h files
+
+pythonScripts - the python scripts used on the Beaglebone Black to send instructions 
+to the gameboy and receive the reaction time back
+
+source - source files
+
+videoDemonstration - videos demonstrating how the reaction tester works
+
+gbdk - The Gameboy Developers Kit. I have included it here and changed all the references to it in the
+code to point to this folder so you do not have to mess around grabbing it yourself and trying to get it to compile.
+
+The file gbReact.gb is the binary that the Gameboy will run. To run this on a real Gameboy, you will need a flash cart 
+for the Gameboy. The one I used is called EZ-FLASH Junior. You can also run this on a Gameboy emulator, but you won't
+be able to connect it with a Beaglebone Black to my knowledge. 
+
+Compilation:
+--------------------------------------
+To compile, simply run make.bat. Batch files are a Windows script file, as I did this mostly in Windows.
+I tried making a makefile to compile on Linux, but it was giving me a unique error that I wasn't 
+able to solve. Thus if you want to compile this on Linux, you must have wine installed.
+
+If you are on Linux and have wine installed, you can compile the code into a Gameboy binary by running the command:
+wine cmd < make.bat
+
+When compiled, it will produce a .gb file. A .gb file is a Gameboy binary.
+
+When compiling, Windows has an error where the batch file doesn’t like the length of where a compiler is located. 
+If you encounter that issue, move the folder containing all the files to a higher directory closer to the root,
+then it should be able to compile successfully.
+
+
