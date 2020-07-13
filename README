@@ -23,10 +23,6 @@ to the gameboy and receive the reaction time back
 
 source - source files
 
-videoDemonstration - videos demonstrating how the reaction tester works
-
-gbdk - The Gameboy Developers Kit. I have included it here and changed all the references to it in the
-code to point to this folder so you do not have to mess around grabbing it yourself and trying to get it to compile.
 
 The file gbReact.gb is the binary that the Gameboy will run. To run this on a real Gameboy, you will need a flash cart 
 for the Gameboy. The one I used is called EZ-FLASH Junior. You can also run this on a Gameboy emulator, but you won't
