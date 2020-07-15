@@ -1,0 +1,337 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.2.1 Fri Apr 24 19:21:31 2020
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc510
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _set_interrupts
+                             12 	.globl _enable_interrupts
+                             13 	.globl _TimerSet
+                             14 	.globl _TimerOn
+                             15 ;--------------------------------------------------------
+                             16 ; Externals used
+                             17 ;--------------------------------------------------------
+                             18 	.globl _IE_REG
+                             19 	.globl _SVBK_REG
+                             20 	.globl _OCPD_REG
+                             21 	.globl _OCPS_REG
+                             22 	.globl _BCPD_REG
+                             23 	.globl _BCPS_REG
+                             24 	.globl _RP_REG
+                             25 	.globl _HDMA5_REG
+                             26 	.globl _HDMA4_REG
+                             27 	.globl _HDMA3_REG
+                             28 	.globl _HDMA2_REG
+                             29 	.globl _HDMA1_REG
+                             30 	.globl _VBK_REG
+                             31 	.globl _KEY1_REG
+                             32 	.globl _WX_REG
+                             33 	.globl _WY_REG
+                             34 	.globl _OBP1_REG
+                             35 	.globl _OBP0_REG
+                             36 	.globl _BGP_REG
+                             37 	.globl _DMA_REG
+                             38 	.globl _LYC_REG
+                             39 	.globl _LY_REG
+                             40 	.globl _SCX_REG
+                             41 	.globl _SCY_REG
+                             42 	.globl _STAT_REG
+                             43 	.globl _LCDC_REG
+                             44 	.globl _NR52_REG
+                             45 	.globl _NR51_REG
+                             46 	.globl _NR50_REG
+                             47 	.globl _NR44_REG
+                             48 	.globl _NR43_REG
+                             49 	.globl _NR42_REG
+                             50 	.globl _NR41_REG
+                             51 	.globl _NR34_REG
+                             52 	.globl _NR33_REG
+                             53 	.globl _NR32_REG
+                             54 	.globl _NR31_REG
+                             55 	.globl _NR30_REG
+                             56 	.globl _NR24_REG
+                             57 	.globl _NR23_REG
+                             58 	.globl _NR22_REG
+                             59 	.globl _NR21_REG
+                             60 	.globl _NR14_REG
+                             61 	.globl _NR13_REG
+                             62 	.globl _NR12_REG
+                             63 	.globl _NR11_REG
+                             64 	.globl _NR10_REG
+                             65 	.globl _IF_REG
+                             66 	.globl _TAC_REG
+                             67 	.globl _TMA_REG
+                             68 	.globl _TIMA_REG
+                             69 	.globl _DIV_REG
+                             70 	.globl _SC_REG
+                             71 	.globl _SB_REG
+                             72 	.globl _P1_REG
+                             73 	.globl __io_out
+                             74 	.globl __io_in
+                             75 	.globl __io_status
+                             76 	.globl _sys_time
+                             77 	.globl __cpu
+                             78 ;--------------------------------------------------------
+                             79 ; special function registers
+                             80 ;--------------------------------------------------------
+                             81 ;--------------------------------------------------------
+                             82 ; special function bits 
+                             83 ;--------------------------------------------------------
+                             84 ;--------------------------------------------------------
+                             85 ; internal ram data
+                             86 ;--------------------------------------------------------
+                             87 	.area _DATA
+                             88 ;--------------------------------------------------------
+                             89 ; overlayable items in internal ram 
+                             90 ;--------------------------------------------------------
+                             91 	.area _OVERLAY
+                             92 ;--------------------------------------------------------
+                             93 ; indirectly addressable internal ram data
+                             94 ;--------------------------------------------------------
+                             95 	.area _ISEG
+                             96 ;--------------------------------------------------------
+                             97 ; bit data
+                             98 ;--------------------------------------------------------
+                             99 	.area _BSEG
+                            100 ;--------------------------------------------------------
+                            101 ; external ram data
+                            102 ;--------------------------------------------------------
+                            103 	.area _XSEG
+                            104 ;--------------------------------------------------------
+                            105 ; global & static initialisations
+                            106 ;--------------------------------------------------------
+                            107 	.area _GSINIT
+                            108 	.area _GSFINAL
+                            109 	.area _GSINIT
+                            110 ;--------------------------------------------------------
+                            111 ; Home
+                            112 ;--------------------------------------------------------
+                            113 	.area _HOME
+                            114 	.area _CODE
+                            115 ;--------------------------------------------------------
+                            116 ; code
+                            117 ;--------------------------------------------------------
+                            118 	.area _CODE
+                            119 ;	source/gbTimer.c 11
+                            120 ; genLabel
+                            121 ; genFunction
+                            122 ;	---------------------------------
+                            123 ; Function TimerOn
+                            124 ; ---------------------------------
+   0000                     125 ___TimerOn_start:
+   0000                     126 _TimerOn:
+                            127 	
+                            128 ;	source/gbTimer.c 12
+                            129 ; genIpush
+   0000 3E 05               130 	ld	a,#0x05
+   0002 F5                  131 	push	af
+   0003 33                  132 	inc	sp
+                            133 ; genCall
+   0004 CD 00 00            134 	call	_set_interrupts
+   0007 E8 01               135 	lda	sp,1(sp)
+                            136 ;	source/gbTimer.c 13
+                            137 ; genCall
+   0009 CD 00 00            138 	call	_enable_interrupts
+                            139 ; genLabel
+   000C                     140 00101$:
+                            141 ; genEndFunction
+                            142 	
+   000C C9                  143 	ret
+   000D                     144 ___TimerOn_end:
+                            145 ;	source/gbTimer.c 21
+                            146 ; genLabel
+                            147 ; genFunction
+                            148 ;	---------------------------------
+                            149 ; Function TimerSet
+                            150 ; ---------------------------------
+   000D                     151 ___TimerSet_start:
+   000D                     152 _TimerSet:
+                            153 	
+                            154 ;	source/gbTimer.c 24
+                            155 ; genCmpEq
+                            156 ; AOP_STK for 
+   000D F8 02               157 	lda	hl,2(sp)
+   000F 2A                  158 	ld	a,(hl+)
+   0010 B6                  159 	or	a,(hl)
+   0011 C2 16 00            160 	jp	nz,00118$
+   0014 18 03               161 	jr	00119$
+   0016                     162 00118$:
+   0016 C3 20 00            163 	jp	00110$
+   0019                     164 00119$:
+                            165 ;	source/gbTimer.c 27
+                            166 ; genAssign
+                            167 ; AOP_SFR for _TAC_REG
+   0019 3E 04               168 	ld	a,#0x04
+   001B E0 00               169 	ldh	(_TAC_REG+0),a
+                            170 ; genGoto
+   001D C3 6B 00            171 	jp	00112$
+                            172 ; genLabel
+   0020                     173 00110$:
+                            174 ;	source/gbTimer.c 28
+                            175 ; genCmpEq
+                            176 ; AOP_STK for 
+   0020 F8 02               177 	lda	hl,2(sp)
+   0022 7E                  178 	ld	a,(hl) ; 2
+   0023 FE 01               179 	cp	a,#0x01
+   0025 C2 30 00            180 	jp	nz,00120$
+   0028 23                  181 	inc	hl
+   0029 7E                  182 	ld	a,(hl) ; 2
+                            183 ; Rule 3
+   002A B7                  184 	or	a,a
+   002B C2 30 00            185 	jp	nz,00120$
+   002E 18 03               186 	jr	00121$
+   0030                     187 00120$:
+   0030 C3 3A 00            188 	jp	00107$
+   0033                     189 00121$:
+                            190 ;	source/gbTimer.c 31
+                            191 ; genAssign
+                            192 ; AOP_SFR for _TAC_REG
+   0033 3E 05               193 	ld	a,#0x05
+   0035 E0 00               194 	ldh	(_TAC_REG+0),a
+                            195 ; genGoto
+   0037 C3 6B 00            196 	jp	00112$
+                            197 ; genLabel
+   003A                     198 00107$:
+                            199 ;	source/gbTimer.c 32
+                            200 ; genCmpEq
+                            201 ; AOP_STK for 
+   003A F8 02               202 	lda	hl,2(sp)
+   003C 7E                  203 	ld	a,(hl) ; 2
+   003D FE 02               204 	cp	a,#0x02
+   003F C2 4A 00            205 	jp	nz,00122$
+   0042 23                  206 	inc	hl
+   0043 7E                  207 	ld	a,(hl) ; 2
+                            208 ; Rule 3
+   0044 B7                  209 	or	a,a
+   0045 C2 4A 00            210 	jp	nz,00122$
+   0048 18 03               211 	jr	00123$
+   004A                     212 00122$:
+   004A C3 54 00            213 	jp	00104$
+   004D                     214 00123$:
+                            215 ;	source/gbTimer.c 35
+                            216 ; genAssign
+                            217 ; AOP_SFR for _TAC_REG
+   004D 3E 06               218 	ld	a,#0x06
+   004F E0 00               219 	ldh	(_TAC_REG+0),a
+                            220 ; genGoto
+   0051 C3 6B 00            221 	jp	00112$
+                            222 ; genLabel
+   0054                     223 00104$:
+                            224 ;	source/gbTimer.c 36
+                            225 ; genCmpEq
+                            226 ; AOP_STK for 
+   0054 F8 02               227 	lda	hl,2(sp)
+   0056 7E                  228 	ld	a,(hl) ; 2
+   0057 FE 03               229 	cp	a,#0x03
+   0059 C2 64 00            230 	jp	nz,00124$
+   005C 23                  231 	inc	hl
+   005D 7E                  232 	ld	a,(hl) ; 2
+                            233 ; Rule 3
+   005E B7                  234 	or	a,a
+   005F C2 64 00            235 	jp	nz,00124$
+   0062 18 03               236 	jr	00125$
+   0064                     237 00124$:
+   0064 C3 6B 00            238 	jp	00112$
+   0067                     239 00125$:
+                            240 ;	source/gbTimer.c 39
+                            241 ; genAssign
+                            242 ; AOP_SFR for _TAC_REG
+   0067 3E 07               243 	ld	a,#0x07
+   0069 E0 00               244 	ldh	(_TAC_REG+0),a
+                            245 ; genLabel
+   006B                     246 00112$:
+                            247 ; genEndFunction
+                            248 	
+   006B C9                  249 	ret
+   006C                     250 ___TimerSet_end:
+                            251 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+    _BCPD_REG                          **** GX
+    _BCPS_REG                          **** GX
+    _BGP_REG                           **** GX
+    _DIV_REG                           **** GX
+    _DMA_REG                           **** GX
+    _HDMA1_REG                         **** GX
+    _HDMA2_REG                         **** GX
+    _HDMA3_REG                         **** GX
+    _HDMA4_REG                         **** GX
+    _HDMA5_REG                         **** GX
+    _IE_REG                            **** GX
+    _IF_REG                            **** GX
+    _KEY1_REG                          **** GX
+    _LCDC_REG                          **** GX
+    _LYC_REG                           **** GX
+    _LY_REG                            **** GX
+    _NR10_REG                          **** GX
+    _NR11_REG                          **** GX
+    _NR12_REG                          **** GX
+    _NR13_REG                          **** GX
+    _NR14_REG                          **** GX
+    _NR21_REG                          **** GX
+    _NR22_REG                          **** GX
+    _NR23_REG                          **** GX
+    _NR24_REG                          **** GX
+    _NR30_REG                          **** GX
+    _NR31_REG                          **** GX
+    _NR32_REG                          **** GX
+    _NR33_REG                          **** GX
+    _NR34_REG                          **** GX
+    _NR41_REG                          **** GX
+    _NR42_REG                          **** GX
+    _NR43_REG                          **** GX
+    _NR44_REG                          **** GX
+    _NR50_REG                          **** GX
+    _NR51_REG                          **** GX
+    _NR52_REG                          **** GX
+    _OBP0_REG                          **** GX
+    _OBP1_REG                          **** GX
+    _OCPD_REG                          **** GX
+    _OCPS_REG                          **** GX
+    _P1_REG                            **** GX
+    _RP_REG                            **** GX
+    _SB_REG                            **** GX
+    _SCX_REG                           **** GX
+    _SCY_REG                           **** GX
+    _SC_REG                            **** GX
+    _STAT_REG                          **** GX
+    _SVBK_REG                          **** GX
+    _TAC_REG                           **** GX
+    _TIMA_REG                          **** GX
+    _TMA_REG                           **** GX
+  0 _TimerOn                           0000 GR
+  0 _TimerSet                          000D GR
+    _VBK_REG                           **** GX
+    _WX_REG                            **** GX
+    _WY_REG                            **** GX
+  0 ___TimerOn_end                     000D R
+  0 ___TimerOn_start                   0000 R
+  0 ___TimerSet_end                    006C R
+  0 ___TimerSet_start                  000D R
+    __cpu                              **** GX
+    __io_in                            **** GX
+    __io_out                           **** GX
+    __io_status                        **** GX
+    _enable_interrupts                 **** GX
+    _set_interrupts                    **** GX
+    _sys_time                          **** GX
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size   6C   flags 0
+   1 _DATA                              size    0   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size    0   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0
