@@ -2,13 +2,11 @@ Gameboy Reaction Tester
 Cameron Smith
 April 24 2020
 
-This program is a reaction tester for the Nintendo Gameboy
-Using the Beaglebone Black, it will send a random value
-between 0-7. The Gameboy will interpret that value as an instruction
-for the player to complete (Pressing a button). 
-After the player presses the button, the Gameboy will send the 
-reaction time to the Beaglebone.
-This is implemented using a modified version of RIOS to run on Gameboy
+Reaction Tester for Nintendo Gameboy is a simple reaction tester built to run on a Nintendo Gameboy with the help of a Beaglebone Black Linux board. It is built using the real time operating system RIOS, which I modifed to work with the Nintendo Gameboy.
+
+To communicate with the Beaglebone Black, I used a Gameboy Link Cable. These link cables were primarily used to connect Gameboys together using a proprietary port. Since the Beaglebone does not have this port, I cut open the cable and tested the bits that were running down on each wire. Once I determined what data was being sent on which wire, I plugged the wires into the beaglebone and wrote a python script to read the data and send data back to the Gameboy.
+
+Running the reaction tester python script, it will send a random value between 0-7 to the Gameboy. The Gameboy will interpret that value as an instruction for the player to press a button. The Gameboy will wait a random amount of time (between 2-10 seconds) and prompt the user to press the button. After the player presses the button, the Gameboy will send the reaction time to the Beaglebone, where it will display the reaction time on the terminal.
 
 Video Demonstartions:
 -----------------------------------------
